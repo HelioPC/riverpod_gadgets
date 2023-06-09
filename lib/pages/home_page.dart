@@ -7,10 +7,11 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _data = ref.watch(dataProvider);
+    final productsList = ref.watch(dataProvider);
+
     return Scaffold(
       appBar: AppBar(),
-      body: _data.when(
+      body: productsList.when(
         data: (data) => Column(
           children: [
             Expanded(
@@ -35,9 +36,12 @@ class HomePage extends ConsumerWidget {
             ),
           ],
         ),
-        error: (err, bt) => Center(
-          child: Text(err.toString()),
-        ),
+        error: (err, bt) {
+          print(bt);
+          return Center(
+            child: Text(err.toString()),
+          );
+        },
         loading: () => const Center(
           child: CircularProgressIndicator(),
         ),
