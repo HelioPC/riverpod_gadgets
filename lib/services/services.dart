@@ -19,7 +19,6 @@ class ApiServices {
 
       return [];
     } catch (e) {
-      print(e.toString());
       return [];
     }
   }

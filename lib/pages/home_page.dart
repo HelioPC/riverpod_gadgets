@@ -10,7 +10,9 @@ class HomePage extends ConsumerWidget {
     final productsList = ref.watch(dataProvider);
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text('Riverpod CRUD'),
+      ),
       body: productsList.when(
         data: (data) => Column(
           children: [
@@ -37,7 +39,6 @@ class HomePage extends ConsumerWidget {
           ],
         ),
         error: (err, bt) {
-          print(bt);
           return Center(
             child: Text(err.toString()),
           );
