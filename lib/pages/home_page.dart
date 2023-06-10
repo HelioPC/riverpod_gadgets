@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:gadgets/pages/detail_page.dart';
 import 'package:gadgets/provider/data_provider.dart';
 
 class HomePage extends ConsumerWidget {
@@ -20,18 +21,25 @@ class HomePage extends ConsumerWidget {
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   final product = data[index];
-                  return Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(product.images[0]),
+                  return InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DetailPage(p: product),
+                      ));
+                    },
+                    child: Card(
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(product.images[0]),
+                        ),
+                        title: Text(product.title),
+                        subtitle: Text('${product.price} \$'),
                       ),
-                      title: Text(product.title),
-                      subtitle: Text('${product.price} \$'),
                     ),
                   );
                 },
                 separatorBuilder: (context, index) => const SizedBox(
-                  height: 10,
+                  height: 2,
                 ),
                 itemCount: data.length,
               ),
